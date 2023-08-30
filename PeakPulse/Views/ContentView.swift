@@ -9,16 +9,22 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        // MARK: - Forms
         ZStack {
             Rectangle()
                 .fill(.clear)
 
-            QuoteContainer(quote: .placeholder)
+            VStack {
+                HStack {
+                    DateContainer()
+                    Spacer()
+                }
+
+                QuoteContainer(quote: .placeholder)
+                Spacer()
+            }
         }
-        // MARK: - Background
         .background {
-            Image("1")
+            Image("3")
                 .opacity(Opacity.strong)
         }
     }
