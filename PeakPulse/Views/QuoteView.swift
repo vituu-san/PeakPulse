@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct QuoteContainer: View {
+struct QuoteView: View {
     private let quote: Quote
 
     init(quote: Quote) {
@@ -41,7 +41,7 @@ struct QuoteContainer: View {
 
 struct PhraseContainer_Previews: PreviewProvider {
     static var previews: some View {
-        QuoteContainer(quote: .placeholder)
+        QuoteView(quote: .placeholder)
             .background(.red)
     }
 }

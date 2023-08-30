@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DateContainer: View {
+struct DateView: View {
     var body: some View {
         ZStack {
             Rectangle()
@@ -31,7 +31,7 @@ struct DateContainer: View {
 
 struct DateContainer_Previews: PreviewProvider {
     static var previews: some View {
-        DateContainer()
+        DateView()
             .background(.red)
     }
 }

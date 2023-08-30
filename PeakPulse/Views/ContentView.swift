@@ -15,12 +15,15 @@ struct ContentView: View {
 
             VStack {
                 HStack {
-                    DateContainer()
+                    DateView()
                     Spacer()
                 }
 
-                QuoteContainer(quote: .placeholder)
+                QuoteView(quote: .placeholder)
+
                 Spacer()
+
+                LikeButtonView()
             }
         }
         .background {
