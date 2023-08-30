@@ -1,5 +1,5 @@
 //
-//  LikeButtonView.swift
+//  ShareButtonView.swift
 //  PeakPulse
 //
 //  Created by Vitor Costa on 30/08/23.
@@ -7,14 +7,7 @@
 
 import SwiftUI
 
-private struct Size {
-    enum Container {
-        static let width: CGFloat = 80
-        static let height: CGFloat = 55
-    }
-}
-
-struct LikeButtonView: View {
+struct ShareButtonView: View {
     var didTap: (() -> Void)?
 
     var body: some View {
@@ -29,9 +22,9 @@ struct LikeButtonView: View {
                         .frame(width: Buttons.width, height: Buttons.height)
                         .foregroundColor(.white)
                         .opacity(Opacity.middle)
-                        .cornerRadius(CornerRadius.big, corners: [.topLeft, .bottomLeft])
+                        .cornerRadius(CornerRadius.big, corners: [.topRight, .bottomRight])
 
-                    Image(systemName: "heart")
+                    Image(systemName: "arrowshape.turn.up.right")
                         .resizable()
                         .frame(width: Buttons.Container.width, height: Buttons.Container.height)
                 }
@@ -41,9 +34,9 @@ struct LikeButtonView: View {
     }
 }
 
-struct LikeButtonView_Previews: PreviewProvider {
+struct ShareButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        LikeButtonView()
+        ShareButtonView()
             .background(.red)
     }
 }

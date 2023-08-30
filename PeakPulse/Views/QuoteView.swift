@@ -20,22 +20,19 @@ struct QuoteView: View {
                 .fill(.white)
                 .opacity(Opacity.middle)
 
-            VStack {
-                space(Space.big)
+            VStack(spacing: Space.medium) {
 
                 Text(quote.phrase)
                     .font(.title)
-
-                space(Space.medium)
 
                 Text("by \(quote.author)")
                     .font(.callout)
                     .italic()
             }
             .multilineTextAlignment(.center)
+            .padding(.horizontal)
         }
         .frame(alignment: .center)
-        .padding(Space.medium)
     }
 }
 

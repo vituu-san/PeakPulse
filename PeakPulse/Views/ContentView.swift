@@ -19,12 +19,18 @@ struct ContentView: View {
                     Spacer()
                 }
 
+                Spacer()
+
                 QuoteView(quote: .placeholder)
 
                 Spacer()
 
-                LikeButtonView()
+                HStack(spacing: Space.small) {
+                    LikeButtonView()
+                    ShareButtonView()
+                }
             }
+            .padding()
         }
         .background {
             Image("3")

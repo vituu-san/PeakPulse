@@ -7,19 +7,23 @@
 
 import SwiftUI
 
+private enum Size {
+    static let width: CGFloat = 250
+    static let height: CGFloat = 70
+}
+
 struct DateView: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .frame(width: 250, height: 70)
+                .frame(width: Size.width, height: Size.height)
                 .foregroundColor(.white)
                 .opacity(Opacity.middle)
-                .cornerRadius(40)
+                .cornerRadius(CornerRadius.big)
 
             Text("\(dateFormatted())")
                 .font(.callout)
         }
-        .padding(Space.medium)
     }
 
     private func dateFormatted() -> String {
