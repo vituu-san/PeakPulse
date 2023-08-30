@@ -12,25 +12,20 @@ struct ShareButtonView: View {
 
     var body: some View {
         ZStack {
-            Button("") {
-                didTap?()
-                print("Button tapped!")
-            }
-            .background {
-                ZStack {
-                    Rectangle()
-                        .frame(width: Buttons.width, height: Buttons.height)
-                        .foregroundColor(.white)
-                        .opacity(Opacity.middle)
-                        .cornerRadius(CornerRadius.big, corners: [.topRight, .bottomRight])
+            Rectangle()
+                .frame(width: Buttons.width, height: Buttons.height)
+                .foregroundColor(.white)
+                .opacity(Opacity.middle)
+                .cornerRadius(CornerRadius.big, corners: [.topRight, .bottomRight])
 
-                    Image(systemName: "arrowshape.turn.up.right")
-                        .resizable()
-                        .frame(width: Buttons.Container.width, height: Buttons.Container.height)
-                }
-            }
+            Image(systemName: "arrowshape.turn.up.right")
+                .resizable()
+                .frame(width: Buttons.Container.width, height: Buttons.Container.height)
         }
         .frame(width: Buttons.width, height: Buttons.height)
+        .onTapGesture {
+            didTap?()
+        }
     }
 }
 

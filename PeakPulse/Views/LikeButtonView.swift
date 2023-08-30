@@ -17,27 +17,36 @@ private struct Size {
 struct LikeButtonView: View {
     var didTap: (() -> Void)?
 
+    @State private var isLiked = false
+    @State private var imageName = "heart"
+    @State private var color = Color.black
+
     var body: some View {
         ZStack {
-            Button("") {
-                didTap?()
-                print("Button tapped!")
-            }
-            .background {
-                ZStack {
-                    Rectangle()
-                        .frame(width: Buttons.width, height: Buttons.height)
-                        .foregroundColor(.white)
-                        .opacity(Opacity.middle)
-                        .cornerRadius(CornerRadius.big, corners: [.topLeft, .bottomLeft])
+            Rectangle()
+                .frame(width: Buttons.width, height: Buttons.height)
+                .foregroundColor(.white)
+                .opacity(Opacity.middle)
+                .cornerRadius(CornerRadius.big, corners: [.topLeft, .bottomLeft])
 
-                    Image(systemName: "heart")
-                        .resizable()
-                        .frame(width: Buttons.Container.width, height: Buttons.Container.height)
-                }
-            }
+            Image(systemName: imageName)
+                .resizable()
+                .frame(width: Buttons.Container.width, height: Buttons.Container.height)
+                .foregroundColor(color)
         }
         .frame(width: Buttons.width, height: Buttons.height)
+        .onTapGesture {
+            withAnimation {
+                isLiked.toggle()
+                imageName = isLiked ? "heart.fill" : "heart"
+                color = isLiked ? .red : .black
+            }
+            didTap?()
+        }
+    }
+
+    private func image() {
+
     }
 }
 
