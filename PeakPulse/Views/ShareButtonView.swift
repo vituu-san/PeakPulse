@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct ShareButtonView: View {
-    var didTap: (() -> Void)?
+    @ObservedObject private var quote: Quote
+
+    init(quote: Quote) {
+        self.quote = quote
+    }
 
     var body: some View {
         ZStack {
@@ -24,14 +28,14 @@ struct ShareButtonView: View {
         }
         .frame(width: Buttons.width, height: Buttons.height)
         .onTapGesture {
-            didTap?()
+            // TODO: make print or message to share
         }
     }
 }
 
 struct ShareButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        ShareButtonView()
+        ShareButtonView(quote: .placeholder)
             .background(.red)
     }
 }

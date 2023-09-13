@@ -14,14 +14,23 @@ private struct Size {
     }
 }
 
-struct LikeButtonView: View {
-    var didTap: (() -> Void)?
+protocol LikeButtonDelegate {
+    func didTap(on quote: Quote)
+}
 
-    @State private var isLiked = false
-    @State private var imageName = "heart"
-    @State private var color = Color.black
+struct LikeButtonView: View {
+    @ObservedObject private var quote: Quote
+
+    private var delegate: LikeButtonDelegate?
+
+    init(quote: Quote, delegate: LikeButtonDelegate? = nil) {
+        self.quote = quote
+        self.delegate = delegate
+    }
 
     var body: some View {
+        var imageName = $quote.favorite.wrappedValue ? "heart.fill" : "heart"
+
         ZStack {
             Rectangle()
                 .frame(width: Buttons.width, height: Buttons.height)
@@ -32,27 +41,22 @@ struct LikeButtonView: View {
             Image(systemName: imageName)
                 .resizable()
                 .frame(width: Buttons.Container.width, height: Buttons.Container.height)
-                .foregroundColor(color)
+                .animation(.default, value: imageName)
         }
         .frame(width: Buttons.width, height: Buttons.height)
         .onTapGesture {
             withAnimation {
-                isLiked.toggle()
-                imageName = isLiked ? "heart.fill" : "heart"
-                color = isLiked ? .red : .black
+                imageName = $quote.favorite.wrappedValue ? "heart.fill" : "heart"
             }
-            didTap?()
+
+            delegate?.didTap(on: quote)
         }
-    }
-
-    private func image() {
-
     }
 }
 
 struct LikeButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        LikeButtonView()
+        LikeButtonView(quote: .placeholder, delegate: nil)
             .background(.red)
     }
 }

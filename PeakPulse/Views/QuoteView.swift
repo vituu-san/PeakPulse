@@ -1,5 +1,5 @@
 //
-//  QuoteContainer.swift
+//  QuoteView.swift
 //  PeakPulse
 //
 //  Created by Vitor Costa on 29/08/23.
@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct QuoteView: View {
-    private let quote: Quote
+    @ObservedObject private var quote: Quote
 
-    init(quote: Quote) {
-        self.quote = quote
+    init(quote: Quote?) {
+        self.quote = quote ?? .placeholder
     }
 
     var body: some View {

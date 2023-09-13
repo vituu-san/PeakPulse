@@ -1,5 +1,5 @@
 //
-//  DateContainer.swift
+//  DateView.swift
 //  PeakPulse
 //
 //  Created by Vitor Costa on 29/08/23.
@@ -7,35 +7,30 @@
 
 import SwiftUI
 
-private enum Size {
-    static let width: CGFloat = 250
-    static let height: CGFloat = 70
-}
-
 struct DateView: View {
+    private var date: String
+
+    init(_ date: String) {
+        self.date = date
+    }
+
     var body: some View {
         ZStack {
             Rectangle()
-                .frame(width: Size.width, height: Size.height)
+                .frame(width: Values.Views.Date.width, height: Values.Views.Date.height)
                 .foregroundColor(.white)
                 .opacity(Opacity.middle)
                 .cornerRadius(CornerRadius.big)
 
-            Text("\(dateFormatted())")
+            Text("\(date)")
                 .font(.callout)
         }
-    }
-
-    private func dateFormatted() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
-        return dateFormatter.string(from: .now)
     }
 }
 
 struct DateContainer_Previews: PreviewProvider {
     static var previews: some View {
-        DateView()
+        DateView("\(Date.now.description)")
             .background(.red)
     }
 }

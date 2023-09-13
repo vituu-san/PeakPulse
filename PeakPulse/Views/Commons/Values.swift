@@ -35,6 +35,13 @@ public struct Values {
         static let medium: CGFloat = 24
         static let big: CGFloat = 36
     }
+
+    public enum Views {
+        public enum Date {
+            static let width: CGFloat = 220
+            static let height: CGFloat = 55
+        }
+    }
 }
 
 public typealias Space = Values.Spacing

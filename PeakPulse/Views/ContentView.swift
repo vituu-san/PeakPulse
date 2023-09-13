@@ -7,7 +7,17 @@
 
 import SwiftUI
 
-struct ContentView: View {
+protocol QuoteViewing: View {
+    var viewModel: any QuoteViewModeling { get }
+}
+
+struct HomeView: View, QuoteViewing {
+    @State var viewModel: any QuoteViewModeling
+
+    init(viewModel: any QuoteViewModeling) {
+        self.viewModel = viewModel
+    }
+
     var body: some View {
         ZStack {
             Rectangle()
@@ -20,11 +30,8 @@ struct ContentView: View {
                 }
 
                 Spacer()
-
-                QuoteView(quote: .placeholder)
-
+                QuoteView(quote: $viewModel.allQuotes.wrappedValue.randomElement() ?? .placeholder)
                 Spacer()
-
                 HStack(spacing: Space.small) {
                     LikeButtonView()
                     ShareButtonView()
@@ -41,6 +48,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        HomeView(viewModel: QuoteViewModel())
     }
 }
