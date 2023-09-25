@@ -8,11 +8,7 @@
 import SwiftUI
 
 struct DateView: View {
-    private var date: String
-
-    init(_ date: String) {
-        self.date = date
-    }
+    @ObservedObject var date: CustomDate
 
     var body: some View {
         ZStack {
@@ -22,7 +18,7 @@ struct DateView: View {
                 .opacity(Opacity.middle)
                 .cornerRadius(CornerRadius.big)
 
-            Text("\(date)")
+            Text("\(date.value)")
                 .font(.callout)
         }
     }
@@ -30,7 +26,7 @@ struct DateView: View {
 
 struct DateContainer_Previews: PreviewProvider {
     static var previews: some View {
-        DateView("\(Date.now.description)")
+        DateView(date: CustomDate())
             .background(.red)
     }
 }

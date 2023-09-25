@@ -7,11 +7,16 @@
 
 import SwiftUI
 
+protocol Viewing: View {
+    var scenePhase: ScenePhase { get }
+    var viewModel: any ViewModeling { get }
+}
+
 protocol HomeViewing: View {
     var viewModel: any HomeViewModeling { get }
 }
 
-struct HomeView: View, HomeViewing {
+struct HomeView: HomeViewing {
     @Environment(\.scenePhase) var scenePhase
 
     @State var viewModel: any HomeViewModeling
@@ -23,7 +28,7 @@ struct HomeView: View, HomeViewing {
 
             VStack {
                 HStack {
-                    DateView(viewModel.date)
+                    DateView(date: viewModel.date)
                     Spacer()
                 }
 
@@ -40,6 +45,9 @@ struct HomeView: View, HomeViewing {
         .background {
             Image("\(viewModel.backgroundImage)")
                 .opacity(Opacity.strong)
+        }
+        .onChange(of: scenePhase) { newPhase in
+            viewModel.manage(newPhase)
         }
     }
 }

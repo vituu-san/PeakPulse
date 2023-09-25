@@ -8,11 +8,7 @@
 import SwiftUI
 
 struct QuoteView: View {
-    @ObservedObject private var quote: Quote
-
-    init(quote: Quote?) {
-        self.quote = quote ?? .placeholder
-    }
+    @ObservedObject var quote: Quote
 
     var body: some View {
         ZStack {

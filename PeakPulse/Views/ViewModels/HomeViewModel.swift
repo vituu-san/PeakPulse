@@ -7,13 +7,12 @@
 
 import SwiftUI
 
-protocol HomeViewModeling: ObservableObject {
+protocol HomeViewModeling: ViewModeling {
     var quote: Quote { get }
-    var date: String { get }
+    var date: CustomDate { get }
     var backgroundImage: Int { get }
 
     func toggleFavorite(_ quote: Quote)
-    func refreshDate()
 }
 
 class HomeViewModel: HomeViewModeling {
@@ -23,15 +22,15 @@ class HomeViewModel: HomeViewModeling {
     var backgroundImage: Int = Int.random(in: 1...3)
     
     @Published var quote: Quote = .placeholder
-    @Published var date: String = ""
+    @Published var date: CustomDate = .init()
 
     init() {
 //        addSomeData()
         refreshData()
-        refreshDate()
         quote = allQuotes.randomElement() ?? .placeholder
     }
 
+    // MARK: - Protocol methods
     func toggleFavorite(_ quote: Quote) {
         do {
             try databaseManager.toggleFavorite(quote)
@@ -43,12 +42,11 @@ class HomeViewModel: HomeViewModeling {
         refreshData()
     }
 
-    func refreshDate() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
-        date = dateFormatter.string(from: .now).capitalized
+    func viewDidAppear() {
+        date.refreshDate()
     }
 
+    // MARK: - Private methods
     private func refreshData() {
         do {
             allQuotes = try Array(databaseManager.all(of: Quote.self))
