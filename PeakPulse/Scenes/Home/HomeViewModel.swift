@@ -28,6 +28,13 @@ class HomeViewModel: HomeViewModeling {
 //        addSomeData()
         refreshData()
         quote = allQuotes.randomElement() ?? .placeholder
+        getAPIKey()
+    }
+
+    private func getAPIKey() {
+        if let apiKey = Bundle.main.infoDictionary?["CLIENT_ID"] as? String {
+            print(apiKey)
+        }
     }
 
     // MARK: - Protocol methods
@@ -58,12 +65,15 @@ class HomeViewModel: HomeViewModeling {
 
     private func addSomeData() {
         do {
-            try databaseManager.create(Quote(phrase: "Lembre sempre que a sua vontade de triunfar é mais importante do que qualquer outra coisa.",
-                                             author: "Abraham Lincoln"))
-            try databaseManager.create(Quote(phrase: "Quando você contrata pessoas mais inteligentes do que você, prova que é mais inteligente do que elas.",
-                                             author: "R. H. Grant"))
-            try databaseManager.create(Quote(phrase: "O talento vence jogos, mas só o trabalho em equipe vence campeonatos.",
-                                             author: "Michael Jordan"))
+            try databaseManager.create(Quote(quote: "Lembre sempre que a sua vontade de triunfar é mais importante do que qualquer outra coisa.",
+                                             author: "Abraham Lincoln",
+                                             category: "vide"))
+            try databaseManager.create(Quote(quote: "Quando você contrata pessoas mais inteligentes do que você, prova que é mais inteligente do que elas.",
+                                             author: "R. H. Grant",
+                                             category: "vida"))
+            try databaseManager.create(Quote(quote: "O talento vence jogos, mas só o trabalho em equipe vence campeonatos.",
+                                             author: "Michael Jordan",
+                                             category: "vida"))
         } catch let error {
             // TODO: show error
             print("Could not connect with database! Reason: \(error.localizedDescription)")

@@ -18,7 +18,7 @@ struct QuoteView: View {
 
             VStack(spacing: Space.medium) {
 
-                Text(quote.phrase)
+                Text(quote.quote)
                     .font(.title)
 
                 Text("by \(quote.author)")
